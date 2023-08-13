@@ -1,7 +1,9 @@
 package com.org.controller;
 
+import com.org.config.CurrencyExchangeProxy;
 import com.org.model.CurrencyConversionResponse;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +19,8 @@ import java.util.Map;
 @RequestMapping("currency-conversion")
 public class CurrencyConversionController {
 
+    @Autowired
+    private CurrencyExchangeProxy currencyExchangeProxy;
     @GetMapping("from/{from}/to/{to}/quantity/{quantity}")
     public CurrencyConversionResponse getConversion(@PathVariable String from, @PathVariable String to, @PathVariable BigDecimal quantity)
     {
@@ -24,9 +28,20 @@ public class CurrencyConversionController {
         Map<String , Object> hmap = new HashMap<String , Object>();
         hmap.put("from",from);
         hmap.put("to",to);
-        hmap.put("quantity",quantity);
-        ResponseEntity<CurrencyConversionResponse> coversionRes =  restTemplate.getForEntity("http://localhost:8000/currency-exchange/from/USD/to/INR",CurrencyConversionResponse.class,hmap);
-        return coversionRes.getBody();
+        ResponseEntity<CurrencyConversionResponse> conversionRes =  restTemplate.getForEntity("http://localhost:8000/currency-exchange/from/{from}/to/{to}",CurrencyConversionResponse.class,hmap);
+        CurrencyConversionResponse currRes = conversionRes.getBody();
+        currRes.setQuantity(quantity);
+        currRes.setTotalCalculatedAmount(currRes.getConversionMultiple().multiply(quantity));
+        return currRes;
     }
 
+    @GetMapping("v2/from/{from}/to/{to}/quantity/{quantity}")
+    public CurrencyConversionResponse getConversionV2(@PathVariable String from, @PathVariable String to, @PathVariable BigDecimal quantity)
+    {
+
+        CurrencyConversionResponse currRes = currencyExchangeProxy.getCurrency(from,to);
+        currRes.setQuantity(quantity);
+        currRes.setTotalCalculatedAmount(currRes.getConversionMultiple().multiply(quantity));
+        return currRes;
+    }
 }

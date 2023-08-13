@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Currency-Eureka-Server/Currency-Eureka-Server.iml" filepath="$PROJECT_DIR$/Currency-Eureka-Server/Currency-Eureka-Server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Currency-zuul-api-gateway/Currency-zuul-api-gateway.iml" filepath="$PROJECT_DIR$/Currency-zuul-api-gateway/Currency-zuul-api-gateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/CurrencyExchange.iml" filepath="$PROJECT_DIR$/.idea/CurrencyExchange.iml" />
       <module fileurl="file://$PROJECT_DIR$/currency-conversion-service/currency-conversion-service.iml" filepath="$PROJECT_DIR$/currency-conversion-service/currency-conversion-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/currency-exchange-config-server/currency-exchange-config-server.iml" filepath="$PROJECT_DIR$/currency-exchange-config-server/currency-exchange-config-server.iml" />

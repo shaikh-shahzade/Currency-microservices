@@ -11,17 +11,23 @@
         <module name="currency-exchange-config-server" />
         <module name="currency-conversion-service" />
         <module name="limit-service" />
+        <module name="Currency-zuul-api-gateway" />
+        <module name="Currency-Eureka-Server" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="currency-conversion-service" target="1.8" />
+      <module name="Currency-Eureka-Server" target="11" />
       <module name="currency-exchange-config-server" target="1.8" />
       <module name="currency-exchange-service" target="1.8" />
+      <module name="Currency-zuul-api-gateway" target="17" />
       <module name="limit-service" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Currency-Eureka-Server" options="-parameters" />
+      <module name="Currency-zuul-api-gateway" options="-parameters" />
       <module name="currency-conversion-service" options="-parameters" />
       <module name="currency-exchange-config-server" options="-parameters" />
       <module name="currency-exchange-service" options="-parameters" />
