@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("currency-exchange")
@@ -27,7 +28,7 @@ public class CurrencyExchangeController {
     public ExchangeValue getExchangedValue(@PathVariable String from, @PathVariable String to) {
 
         ExchangeValue exchangeValue = exchangeRepo.findOneByFromAndTo(from,to);
-        exchangeValue.setPort(Integer.parseInt(environment.getProperty("local.server.port")));
+        exchangeValue.setPort(Integer.parseInt(Objects.requireNonNull(environment.getProperty("local.server.port"))));
 
         return exchangeValue;
     }
